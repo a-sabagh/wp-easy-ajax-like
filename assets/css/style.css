@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?9i8tmm');
+    src:  url('fonts/icomoon.eot?9i8tmm#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?9i8tmm') format('truetype'),
+        url('fonts/icomoon.woff?9i8tmm') format('woff'),
+        url('fonts/icomoon.svg?9i8tmm#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-heart:before {
+    content: "\e902";
+}
+.icon-heart-o:before {
+    content: "\e900";
+}
+.lj-like-wp {
+    text-decoration: none;
+    text-transform: none;
+    border: none;
+    box-shadow: none !important;
+}
+/*
+* loader 
+*/
+.lj-loader,
+.lj-loader:before,
+.lj-loader:after {
+    background: #bdbdbd;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 4px;
+    height: 4px;
+}
+.lj-loader {
+    display: inline-block;
+    color: #bdbdbd;
+    text-indent: -9999em;
+    margin-left: 8px;
+    position: relative;
+    font-size: 11px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+.lj-loader:before,
+.lj-loader:after {
+    position: absolute;
+    top: 0;
+    content: '';
+}
+.lj-loader:before {
+    left: -6px;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.lj-loader:after {
+    left: 6px;
+}
+@-webkit-keyframes load1 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0;
+        height: 6px;
+    }
+    40% {
+        box-shadow: 0 -9px;
+        height: 9px;
+    }
+}
+@keyframes load1 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0;
+        height: 6px;
+    }
+    40% {
+        box-shadow: 0 -9px;
+        height: 9px;
+    }
+}
