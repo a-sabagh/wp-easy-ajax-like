@@ -18,13 +18,14 @@ class lj_init{
     }
     
     public function admin_enqueue_scripts($hooks){
+        wp_enqueue_style( 'wp-color-picker' ); 
         wp_enqueue_style("lj-admin-style",LJ_PDU . "/assets/css/admin-style.css");
+        wp_enqueue_script("lj-admin-script",LJ_PDU . "assets/js/admin-script.js",array("jquery","wp-color-picker"), "" , TRUE);
     }
     
     public function public_enqueue_scripts(){
         wp_enqueue_style("lj-style",LJ_PDU . "/assets/css/style.css");
         wp_enqueue_script("lj-script",LJ_PDU . "/assets/js/script.js",array("jquery"), "" , TRUE);
-        
     }
     
     private function load_modules(){

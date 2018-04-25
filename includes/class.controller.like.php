@@ -61,7 +61,7 @@ class lj_like {
         $cookie_name = 'lj_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
-        if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1") {
+        if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1" and is_single()) {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
@@ -88,7 +88,7 @@ class lj_like {
         $cookie_name = 'lj_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
-        if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1") {
+        if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1" and is_single()) {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
