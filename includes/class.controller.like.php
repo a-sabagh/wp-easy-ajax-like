@@ -7,8 +7,18 @@ class lj_like {
         add_action("wp_enqueue_scripts", array($this, "localize_like_script"));
         add_action("wp_ajax_lj_liked", array($this, "lj_liked"));
         add_action("wp_ajax_nopriv_lj_liked", array($this, "lj_liked"));
+        $legal_pts = $this->legal_post_type();
+        foreach($legal_pts as $legal_pt){
+            add_filter("manage_{$legal_pt}_posts_columns" , array($this,'add_like_posts_column'),10,1);
+            add_action("manage_{$legal_pt}_posts_custom_column" , array($this,'add_like_custom_column'),10,2);
+        }
+        
     }
-
+    
+    public function legal_post_type(){
+        $lj_setting = get_option('lj_setting_option');
+        return $lj_setting['lj_post_types'];
+    }
     public function lj_liked() {
         if ($_POST['liked'] == "0") {
             $this->add_post_like($_POST['post_id']);
@@ -105,6 +115,17 @@ class lj_like {
         }
 
         echo $output;
+    }
+    
+    public function add_like_posts_column($columns){
+        return array_merge($columns,array('lj_like' => '<span class="dashicons dashicons-heart"></span>'));
+    }
+    
+    public function add_like_custom_column($column, $post_id){
+        if($column == "lj_like"){
+            $like = (get_post_meta($post_id,"lj_like_wp",TRUE))? get_post_meta($post_id,"lj_like_wp",TRUE) : "0";
+            echo $like;
+        }
     }
 
 }
