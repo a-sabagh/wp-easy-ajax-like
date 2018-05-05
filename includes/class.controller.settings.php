@@ -63,9 +63,15 @@ class lj_settings {
         $key = array_search("attachment", $post_types);
         unset($post_types[$key]);
         foreach ($post_types as $post_type):
+            if(is_array($active_post_type)){
+                $checked = (in_array($post_type, $active_post_type)) ? "checked" : "";
+            }else{
+                $checked = '';
+            }
+            
             ?>
             <label>
-                <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="lj_setting_option[<?php echo $args['name']; ?>][]" <?php echo (in_array($post_type, $active_post_type)) ? "checked" : ""; ?> value="<?php echo $post_type; ?>" >
+                <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="lj_setting_option[<?php echo $args['name']; ?>][]" <?php echo $checked; ?> value="<?php echo $post_type; ?>" >
             </label>
             <br>
             <?php
