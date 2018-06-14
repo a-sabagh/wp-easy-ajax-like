@@ -94,7 +94,7 @@ class lj_settings {
     }
 
     public function admin_menu() {
-        add_submenu_page("options-general.php", __("Ajax Like Settings", "rng-ajaxlike"), __("Ajax Like Settings"), "administrator", "ajaxlike-settings", array($this, "ajaxlike_settings"));
+        add_submenu_page("options-general.php", __("Ajax Like Settings", "rng-ajaxlike"), __("Ajax Like Settings","rng-ajaxlike"), "administrator", "ajaxlike-settings", array($this, "ajaxlike_settings"));
     }
 
     public function ajaxlike_settings() {
