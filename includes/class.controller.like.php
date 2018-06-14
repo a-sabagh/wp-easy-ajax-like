@@ -17,7 +17,11 @@ class lj_like {
     
     public function legal_post_type(){
         $lj_setting = get_option('lj_setting_option');
-        return $lj_setting['lj_post_types'];
+        if(!empty($lj_setting)){
+            return $lj_setting['lj_post_types'];
+        }else{
+            return array();
+        }
     }
     public function lj_liked() {
         if ($_POST['liked'] == "0") {
