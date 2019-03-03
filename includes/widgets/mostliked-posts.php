@@ -5,7 +5,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
     public function __construct() {
         $widget_options = array(
             'classname' => 'mostliked-posts',
-            'description' => __("show most liked posts", "rng-ajaxlike")
+            'description' => __("Show most liked posts", "rng-ajaxlike")
         );
         parent::__construct("lj_mostliked_posts", __("Most Liked Posts", "rng-ajaxlike"), $widget_options);
     }
