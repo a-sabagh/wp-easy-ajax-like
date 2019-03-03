@@ -99,3 +99,10 @@
         height: 9px;
     }
 }
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.justfy-content-between {
+    justify-content: space-between;
+}

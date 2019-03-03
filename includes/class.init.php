@@ -29,7 +29,8 @@ class lj_init{
     }
     
     private function load_modules(){
-        include "class.controller.settings.php";
-        include "class.controller.like.php";
+        include trailingslashit(__DIR__) . "class.controller.settings.php";
+        include trailingslashit(__DIR__) . "class.controller.like.php";
+        include trailingslashit(__DIR__) . "widgets/mostliked-posts.php";
     }
 }
