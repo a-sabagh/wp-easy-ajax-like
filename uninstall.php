@@ -6,7 +6,8 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 //delte options
 $options = array(
     "lj_setting_option",
-    "lj_configration_dissmiss"
+    "lj_configration_dissmiss",
+    "widget_lj_mostliked_posts"
 );
 foreach ($options as $option) {
     if (get_option($option)) {
