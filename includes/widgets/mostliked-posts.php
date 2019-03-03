@@ -16,7 +16,14 @@ class lj_mostliked_posts_widget extends WP_Widget {
     public function widget($args, $instance) {
         $title = !empty($instance['title']) ? $instance['title'] : "";
         $title = apply_filters("widget_title", $title);
-        $post_types = (!empty($instance['post_types']) and isset($instance['post_types'])) ? $instance['post_types'] : array('post');
+        $active_post_type = get_option("lj_setting_option");
+        if ($active_post_type == FALSE) {
+            $active_post_type = array("post");
+        } else {
+            $active_post_type = $active_post_type['lj_post_types'];
+        }
+        $post_types_widget = (!empty($instance['post_types']) and isset($instance['post_types'])) ? $instance['post_types'] : array('post');
+        $post_types = array_intersect($active_post_type, $post_types_widget);
         $posts_count = (!empty($instance['posts_count'])) ? $instance['posts_count'] : 4;
 
         $output = $args["before_widget"];
