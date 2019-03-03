@@ -8,21 +8,21 @@ class lj_like {
         add_action("wp_ajax_lj_liked", array($this, "lj_liked"));
         add_action("wp_ajax_nopriv_lj_liked", array($this, "lj_liked"));
         $legal_pts = $this->legal_post_type();
-        foreach($legal_pts as $legal_pt){
-            add_filter("manage_{$legal_pt}_posts_columns" , array($this,'add_like_posts_column'),10,1);
-            add_action("manage_{$legal_pt}_posts_custom_column" , array($this,'add_like_custom_column'),10,2);
+        foreach ($legal_pts as $legal_pt) {
+            add_filter("manage_{$legal_pt}_posts_columns", array($this, 'add_like_posts_column'), 10, 1);
+            add_action("manage_{$legal_pt}_posts_custom_column", array($this, 'add_like_custom_column'), 10, 2);
         }
-        
     }
-    
-    public function legal_post_type(){
+
+    public function legal_post_type() {
         $lj_setting = get_option('lj_setting_option');
-        if(!empty($lj_setting)){
+        if (!empty($lj_setting)) {
             return $lj_setting['lj_post_types'];
-        }else{
+        } else {
             return array();
         }
     }
+
     public function lj_liked() {
         if ($_POST['liked'] == "0") {
             $this->add_post_like($_POST['post_id']);
@@ -40,10 +40,12 @@ class lj_like {
         $cookie_name = "lj_like_wp" . $post_id;
         setcookie($cookie_name, $post_id, time() + YEAR_IN_SECONDS, "/");
         $like_count = get_post_meta($post_id, "lj_like_wp", TRUE);
-        if ($like_count) {
-            update_post_meta($post_id, "lj_like_wp", $like_count + 1);
-        } else {
+        if (intval($like_count) > 0) {
+            update_post_meta($post_id, "lj_like_wp", intval($like_count) + 1);
+        } elseif (!isset($like_count) or empty ($like_count)) {
             add_post_meta($post_id, "lj_like_wp", 1);
+        } else {
+            update_post_meta($post_id, "lj_like_wp", 1);
         }
     }
 
@@ -73,7 +75,7 @@ class lj_like {
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : 0;
         $legal_post_types = $lj_setting['lj_post_types'];
-        $show_like_switch = (!empty($lj_setting['lj_show_like']))? $lj_setting['lj_show_like'] : "1";
+        $show_like_switch = (!empty($lj_setting['lj_show_like'])) ? $lj_setting['lj_show_like'] : "1";
         $cookie_name = 'lj_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
@@ -122,14 +124,14 @@ class lj_like {
 
         echo $output;
     }
-    
-    public function add_like_posts_column($columns){
-        return array_merge($columns,array('lj_like' => '<span class="dashicons dashicons-heart"></span>'));
+
+    public function add_like_posts_column($columns) {
+        return array_merge($columns, array('lj_like' => '<span class="dashicons dashicons-heart"></span>'));
     }
-    
-    public function add_like_custom_column($column, $post_id){
-        if($column == "lj_like"){
-            $like = (get_post_meta($post_id,"lj_like_wp",TRUE))? get_post_meta($post_id,"lj_like_wp",TRUE) : "0";
+
+    public function add_like_custom_column($column, $post_id) {
+        if ($column == "lj_like") {
+            $like = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : "0";
             echo $like;
         }
     }
