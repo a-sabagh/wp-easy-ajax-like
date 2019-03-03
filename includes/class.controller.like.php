@@ -75,7 +75,7 @@ class lj_like {
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : 0;
         $legal_post_types = $lj_setting['lj_post_types'];
-        $show_like_switch = (!empty($lj_setting['lj_show_like'])) ? $lj_setting['lj_show_like'] : "1";
+        $show_like_switch = (isset($lj_setting['lj_show_like'])) ? $lj_setting['lj_show_like'] : "1";
         $cookie_name = 'lj_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
