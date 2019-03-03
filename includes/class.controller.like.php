@@ -52,7 +52,7 @@ class lj_like {
         unset($_COOKIE[$cookie_name]);
         setcookie($cookie_name, '', time() - 3600, '/');
         $like_count = get_post_meta($post_id, "lj_like_wp", TRUE);
-        if (isset($like_count) and $like_count > 0) {
+        if (isset($like_count) and intval($like_count) > 0) {
             update_post_meta($post_id, "lj_like_wp", $like_count - 1);
         } else {
             update_post_meta($post_id, "lj_like_wp", 0);
