@@ -15,6 +15,7 @@ class lj_init{
     
     public function add_text_domain(){
         load_plugin_textdomain($this->slug, FALSE, LJ_PRT . "/languages");
+        include trailingslashit(__DIR__) . "translate.php";
     }
     
     public function admin_enqueue_scripts($hooks){
