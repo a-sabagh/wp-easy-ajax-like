@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-06-14 10:34-0700\n"
+"POT-Creation-Date: 2019-03-03 15:21+0330\n"
 "PO-Revision-Date: 2018-06-14 10:35-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -76,4 +77,40 @@ msgstr ""
 
 #: includes/class.controller.settings.php:125
 msgid "Settings"
+msgstr ""
+
+#: includes/translate.php:2
+msgid "RNG_AjaxLike"
+msgstr ""
+
+#: includes/translate.php:3
+msgid ""
+"WordPress plugin that allow the visitor to like posts content in a single "
+"page using Ajax technology with excellent features like setting panel and "
+"widget that show posts order by like counts."
+msgstr ""
+
+#: includes/translate.php:4
+msgid "Abolfazl Sabagh"
+msgstr ""
+
+#: includes/widgets/mostliked-posts.php:8
+msgid "Show most liked posts"
+msgstr ""
+
+#: includes/widgets/mostliked-posts.php:10
+#: includes/widgets/mostliked-posts.php:74
+msgid "Most Liked Posts"
+msgstr ""
+
+#: includes/widgets/mostliked-posts.php:86
+msgid "Title"
+msgstr ""
+
+#: includes/widgets/mostliked-posts.php:90
+msgid "Select post types"
+msgstr ""
+
+#: includes/widgets/mostliked-posts.php:101
+msgid "Posts per page"
 msgstr ""

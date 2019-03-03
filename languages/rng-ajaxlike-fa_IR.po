@@ -1,9 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-06-14 10:34-0700\n"
-"PO-Revision-Date: 2018-06-14 10:37-0700\n"
+"POT-Creation-Date: 2019-03-03 15:21+0330\n"
+"PO-Revision-Date: 2019-03-03 15:23+0330\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,8 +13,6 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"Last-Translator: \n"
-"Language: fa\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: admin/setting-panel.php:6
@@ -81,3 +81,42 @@ msgstr "بی خیال"
 #: includes/class.controller.settings.php:125
 msgid "Settings"
 msgstr "تنظیمات"
+
+#: includes/translate.php:2
+msgid "RNG_AjaxLike"
+msgstr "پلاگین لایک ایجکسی"
+
+#: includes/translate.php:3
+msgid ""
+"WordPress plugin that allow the visitor to like posts content in a single "
+"page using Ajax technology with excellent features like setting panel and "
+"widget that show posts order by like counts."
+msgstr ""
+"پلاگین وردپرس که به بازدیدکنندگان اجازه می دهد پست های مطالب را در یک "
+"صفحه با استفاده از تکنولوژی آیجکس لایک کنند. این پلاگین ویژگی های عالی "
+"مانند پنل تنظیمات و ویجت نمایش پست ها بر اساس تعداد لایک دارد."
+
+#: includes/translate.php:4
+msgid "Abolfazl Sabagh"
+msgstr "ابوالفضل صباغ"
+
+#: includes/widgets/mostliked-posts.php:8
+msgid "Show most liked posts"
+msgstr "نمایش پست های مورد علاقه"
+
+#: includes/widgets/mostliked-posts.php:10
+#: includes/widgets/mostliked-posts.php:74
+msgid "Most Liked Posts"
+msgstr "محبوبترین پست ها"
+
+#: includes/widgets/mostliked-posts.php:86
+msgid "Title"
+msgstr "عنوان"
+
+#: includes/widgets/mostliked-posts.php:90
+msgid "Select post types"
+msgstr "انتخاب پست تایپ"
+
+#: includes/widgets/mostliked-posts.php:101
+msgid "Posts per page"
+msgstr "تعداد پست در صفحه"
