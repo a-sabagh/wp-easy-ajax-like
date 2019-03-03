@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Plugin Name: RNG_AjaxLike
+ * Plugin Name: rng-ajaxlike
  * Description: WordPress plugin that allow the visitor to like posts content in a single page using Ajax technology with excellent features like setting panel and widget that show posts order by like counts.
  * Version: 1.0
  * Author: Abolfazl Sabagh

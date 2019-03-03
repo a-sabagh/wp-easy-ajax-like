@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-03-03 15:21+0330\n"
-"PO-Revision-Date: 2019-03-03 15:23+0330\n"
+"POT-Creation-Date: 2019-03-03 15:45+0330\n"
+"PO-Revision-Date: 2019-03-03 15:47+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa\n"
@@ -33,7 +33,7 @@ msgid ""
 "button"
 msgstr ""
 "قبل از هر کار لطفا پست تایپ هایی که قرار است برای آن دکمه لایک باشد را "
-"انتخاب کنید."
+"انتخاب کنید"
 
 #: includes/class.controller.settings.php:36
 msgid "general settings"
@@ -61,14 +61,14 @@ msgstr "خیر"
 
 #: includes/class.controller.settings.php:97
 msgid "Ajax Like Settings"
-msgstr "تنظیمات لایک "
+msgstr "تنظیمات لایک"
 
 #: includes/class.controller.settings.php:107
 msgid ""
 "RNG_ajaxLike is activated, you may need to configure it to work properly."
 msgstr ""
-"RNG_ajaxLike فعال است، ممکن است لازم باشد آن را پیکربندی کنید تا به درستی "
-"کار کند."
+"پلاگین لایک آژاکسی مطالب فعال است، ممکن است لازم باشد آن را پیکربندی کنید "
+"تا به درستی کار کند."
 
 #: includes/class.controller.settings.php:107
 msgid "Go to Settings page"
@@ -83,8 +83,8 @@ msgid "Settings"
 msgstr "تنظیمات"
 
 #: includes/translate.php:2
-msgid "RNG_AjaxLike"
-msgstr "پلاگین لایک ایجکسی"
+msgid "rng-ajaxlike"
+msgstr "لایک آژاکسی مطالب"
 
 #: includes/translate.php:3
 msgid ""
@@ -92,8 +92,8 @@ msgid ""
 "page using Ajax technology with excellent features like setting panel and "
 "widget that show posts order by like counts."
 msgstr ""
-"پلاگین وردپرس که به بازدیدکنندگان اجازه می دهد پست های مطالب را در یک "
-"صفحه با استفاده از تکنولوژی آیجکس لایک کنند. این پلاگین ویژگی های عالی "
+"پلاگین وردپرس که به بازدیدکنندگان اجازه می دهد پست های مطالب را در صفحه "
+"داخلی با استفاده از تکنولوژی آژاکس لایک کنند. این پلاگین ویژگی های عالی "
 "مانند پنل تنظیمات و ویجت نمایش پست ها بر اساس تعداد لایک دارد."
 
 #: includes/translate.php:4
@@ -120,3 +120,6 @@ msgstr "انتخاب پست تایپ"
 #: includes/widgets/mostliked-posts.php:101
 msgid "Posts per page"
 msgstr "تعداد پست در صفحه"
+
+#~ msgid "RNG_AjaxLike"
+#~ msgstr "پلاگین لایک ایجکسی"

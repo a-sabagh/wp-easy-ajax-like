@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-03-03 15:21+0330\n"
+"POT-Creation-Date: 2019-03-03 15:45+0330\n"
 "PO-Revision-Date: 2018-06-14 10:35-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -80,7 +80,7 @@ msgid "Settings"
 msgstr ""
 
 #: includes/translate.php:2
-msgid "RNG_AjaxLike"
+msgid "rng-ajaxlike"
 msgstr ""
 
 #: includes/translate.php:3
