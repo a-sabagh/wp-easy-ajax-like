@@ -16,4 +16,4 @@ foreach ($options as $option) {
 }
 // drop a metadata
 global $wpdb;
-$wpdb->query("DELETE * FROM {$wpdb->prefix}postmeta WHERE meta_key = 'rajl_like_wp'");
+$wpdb->query("DELETE FROM {$wpdb->prefix}postmeta WHERE meta_key = 'rajl_like_wp'");
