@@ -14,8 +14,12 @@ class lj_like {
         }
     }
 
+    /**
+     * check is legal post type based on settings
+     * @return Array
+     */
     public function legal_post_type() {
-        $lj_setting = get_option('lj_setting_option');
+        $lj_setting = get_option('rajl_setting_option');
         if (!empty($lj_setting)) {
             return $lj_setting['lj_post_types'];
         } else {
@@ -23,6 +27,9 @@ class lj_like {
         }
     }
 
+    /**
+     * response to ajax call in wordpress. in other word handle wordpress hooks
+     */
     public function lj_liked() {
         if ($_POST['liked'] == "0") {
             $this->add_post_like($_POST['post_id']);
@@ -36,31 +43,40 @@ class lj_like {
         wp_die();
     }
 
+    /**
+     * add post meta with meta_key rajl_like_wp and meta_value like count
+     * @param type $post_id
+     */
     public function add_post_like($post_id) {
-        $cookie_name = "lj_like_wp" . $post_id;
+        $cookie_name = "rajl_like_wp" . $post_id;
         setcookie($cookie_name, $post_id, time() + YEAR_IN_SECONDS, "/");
-        $like_count = get_post_meta($post_id, "lj_like_wp", TRUE);
+        $like_count = get_post_meta($post_id, "rajl_like_wp", TRUE);
         if (intval($like_count) > 0) {
-            update_post_meta($post_id, "lj_like_wp", intval($like_count) + 1);
-        } elseif (!isset($like_count) or empty ($like_count)) {
-            add_post_meta($post_id, "lj_like_wp", 1);
+            update_post_meta($post_id, "rajl_like_wp", intval($like_count) + 1);
+        } elseif (!isset($like_count) or empty($like_count)) {
+            add_post_meta($post_id, "rajl_like_wp", 1);
         } else {
-            update_post_meta($post_id, "lj_like_wp", 1);
+            update_post_meta($post_id, "rajl_like_wp", 1);
         }
     }
-
+    /**
+     * decrease post like count
+     * @param type $post_id
+     */
     public function remove_post_like($post_id) {
-        $cookie_name = "lj_like_wp" . $post_id;
+        $cookie_name = "rajl_like_wp" . $post_id;
         unset($_COOKIE[$cookie_name]);
         setcookie($cookie_name, '', time() - 3600, '/');
-        $like_count = get_post_meta($post_id, "lj_like_wp", TRUE);
+        $like_count = get_post_meta($post_id, "rajl_like_wp", TRUE);
         if (isset($like_count) and intval($like_count) > 0) {
-            update_post_meta($post_id, "lj_like_wp", $like_count - 1);
+            update_post_meta($post_id, "rajl_like_wp", $like_count - 1);
         } else {
-            update_post_meta($post_id, "lj_like_wp", 0);
+            update_post_meta($post_id, "rajl_like_wp", 0);
         }
     }
-
+    /**
+     * localize params to script
+     */
     public function localize_like_script() {
         $data = array(
             "post_id" => get_the_ID(),
@@ -69,14 +85,18 @@ class lj_like {
         );
         wp_localize_script("lj-script", like_obj, $data);
     }
-
+    /**
+     * add like button end of post content
+     * @param String $content
+     * @return String
+     */
     public function output_content_like($content) {
-        $lj_setting = get_option('lj_setting_option');
+        $lj_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
-        $like_count = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : 0;
+        $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
         $legal_post_types = $lj_setting['lj_post_types'];
         $show_like_switch = (isset($lj_setting['lj_show_like'])) ? $lj_setting['lj_show_like'] : "1";
-        $cookie_name = 'lj_like_wp' . get_the_ID();
+        $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
         if (in_array(get_post_type($post_id), $legal_post_types) and $show_like_switch == "1" and is_singular()) {
@@ -88,7 +108,7 @@ class lj_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-                    <?php endif; ?>
+            <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo $like_count; ?></span>
             </div>
             <?php
@@ -98,12 +118,14 @@ class lj_like {
 
         return $content;
     }
-
+    /**
+     * static functionn to show like button and like count for programmers
+     */
     public static function content_like() {
-        $lj_setting = get_option('lj_setting_option');
+        $lj_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
-        $like_count = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : 0;
-        $cookie_name = 'lj_like_wp' . get_the_ID();
+        $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
+        $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
         if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1" and is_single()) {
@@ -115,7 +137,7 @@ class lj_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-                    <?php endif; ?>
+            <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo $like_count; ?></span>
             </div>
             <?php
@@ -124,14 +146,22 @@ class lj_like {
 
         echo $output;
     }
-
+    /**
+     * add like count header to post list in admin panel
+     * @param type $columns
+     * @return type
+     */
     public function add_like_posts_column($columns) {
         return array_merge($columns, array('lj_like' => '<span class="dashicons dashicons-heart"></span>'));
     }
-
+    /**
+     * add like count to post list in admin panel
+     * @param type $column
+     * @param type $post_id
+     */
     public function add_like_custom_column($column, $post_id) {
         if ($column == "lj_like") {
-            $like = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : "0";
+            $like = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : "0";
             echo $like;
         }
     }

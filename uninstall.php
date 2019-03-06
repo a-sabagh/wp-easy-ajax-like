@@ -5,9 +5,9 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 }
 //delte options
 $options = array(
-    "lj_setting_option",
-    "lj_configration_dissmiss",
-    "widget_lj_mostliked_posts"
+    "rajl_setting_option",
+    "rajl_configration_dissmiss",
+    "widget_rajl_mostliked_posts"
 );
 foreach ($options as $option) {
     if (get_option($option)) {
@@ -16,4 +16,4 @@ foreach ($options as $option) {
 }
 // drop a metadata
 global $wpdb;
-$wpdb->query("DELETE * FROM {$wpdb->prefix}postmeta WHERE meta_key = 'lj_like_wp'");
+$wpdb->query("DELETE * FROM {$wpdb->prefix}postmeta WHERE meta_key = 'rajl_like_wp'");

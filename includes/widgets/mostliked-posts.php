@@ -1,6 +1,6 @@
 <?php
 
-class lj_mostliked_posts_widget extends WP_Widget {
+class rajl_mostliked_posts_widget extends WP_Widget {
 
     public function __construct() {
         $widget_options = array(
@@ -16,7 +16,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
     public function widget($args, $instance) {
         $title = !empty($instance['title']) ? $instance['title'] : "";
         $title = apply_filters("widget_title", $title);
-        $active_post_type = get_option("lj_setting_option");
+        $active_post_type = get_option("rajl_setting_option");
         if ($active_post_type == FALSE) {
             $active_post_type = array("post");
         } else {
@@ -34,7 +34,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
         $query_args = array(
             'post_type' => $post_types,
             'posts_per_page' => $posts_count,
-            'meta_key' => 'lj_like_wp',
+            'meta_key' => 'rajl_like_wp',
             'orderby' => 'meta_value_num',
             'order' => 'DESC'
         );
@@ -46,7 +46,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
                 while ($query->have_posts()):
                     $query->the_post();
                     $post_id = get_the_ID();
-                    $liked_count = (get_post_meta($post_id, "lj_like_wp", TRUE)) ? get_post_meta($post_id, "lj_like_wp", TRUE) : 0;
+                    $liked_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
                     ?>
                     <li class="d-flex justfy-content-between">
                         <a class="flex-grow-1" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
@@ -75,7 +75,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
         $post_types = (!empty($instance['post_types']) and isset($instance['post_types'])) ? $instance['post_types'] : array('post');
         $posts_count = (!empty($instance['posts_count'])) ? $instance['posts_count'] : 4;
         $style = (!empty($instance['style'])) ? $instance['style'] : 0;
-        $active_post_type = get_option("lj_setting_option");
+        $active_post_type = get_option("rajl_setting_option");
         if ($active_post_type == FALSE) {
             $active_post_type = array("post");
         } else {
@@ -125,7 +125,7 @@ class lj_mostliked_posts_widget extends WP_Widget {
  * register widget main function
  */
 function register_lj_mostliked_posts() {
-    register_widget("lj_mostliked_posts_widget");
+    register_widget("rajl_mostliked_posts_widget");
 }
 
 add_action("widgets_init", "register_lj_mostliked_posts");

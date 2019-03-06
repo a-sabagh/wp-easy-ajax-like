@@ -14,12 +14,15 @@
  * @subpackage          Core
  */
 
+//RAJL_
+//rajl_
+
 define(LJ_PRU, plugin_basename(__FILE__));
 define(LJ_PDU, plugin_dir_url(__FILE__));   //http://localhost:8888/rng-plugin/wp-content/plugins/rng-ajaxLike/
 define(LJ_PRT, basename(__DIR__));          //rng-ajaxLike.php
 define(LJ_PDP, plugin_dir_path(__FILE__));  //Applications/MAMP/htdocs/rng-plugin/wp-content/plugins/rng-ajaxLike
-define(LJ_TMP, LJ_PDP . "/public/");        // view OR templates System for public 
-define(LJ_ADM, LJ_PDP . "/admin/");         // view OR templates System for admin panel
+define(LJ_TMP, RAJL_PDP . "/public/");        // view OR templates System for public 
+define(LJ_ADM, RAJL_PDP . "/admin/");         // view OR templates System for admin panel
 
 require_once 'includes/class.init.php';
 $refresh_init = new lj_init(1.0, 'rng-ajaxlike');
