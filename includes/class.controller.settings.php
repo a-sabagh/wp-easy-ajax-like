@@ -62,7 +62,7 @@ class rajl_settings {
     public function general_settings_like_color($args) {
         $btn_color = get_option("rajl_setting_option");
         if ($btn_color == FALSE) {
-            $btn_color = "-";
+            $btn_color = "#dd3333";
         } else {
             $btn_color = $btn_color['rajl_btn_color'];
         }
