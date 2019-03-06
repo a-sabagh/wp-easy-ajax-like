@@ -31,11 +31,15 @@ class rajl_like {
      * response to ajax call in wordpress. in other word handle wordpress hooks
      */
     public function rajl_liked() {
-        if ($_POST['liked'] == "0") {
-            $this->add_post_like($_POST['post_id']);
+        
+        $liked = intval($_POST['liked']);
+        $post_id = intval($_POST['post_id']);
+        
+        if ($liked == 0 and is_numeric($post_id)) {
+            $this->add_post_like($post_id);
             echo "add";
-        } elseif ($_POST['liked'] == "1") {
-            $this->remove_post_like($_POST['post_id']);
+        } elseif ($liked == 1 and is_numeric($post_id)) {
+            $this->remove_post_like($post_id);
             echo "remove";
         } else {
             echo "false";
@@ -103,13 +107,13 @@ class rajl_like {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
-                <a href="#" class="lj-like-wp <?php echo $class; ?>" title="<?php esc_attr_e("like this", "rng-ajaxlike"); ?>" >
+                <a href="#" class="lj-like-wp <?php echo esc_attr($class); ?>" title="<?php esc_attr_e("like this", "rng-ajaxlike"); ?>" >
                     <?php if (isset($cookie)): ?>
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
             <?php endif; ?>
-                </a>&nbsp;<span class="lj-post-like-count"><?php echo $like_count; ?></span>
+                </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php
             $output = ob_get_clean();
@@ -132,13 +136,13 @@ class rajl_like {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
-                <a href="#" class="lj-like-wp <?php echo $class; ?>" title="<?php esc_attr_e("like this", "rng-ajaxlike"); ?>" >
+                <a href="#" class="lj-like-wp <?php echo esc_attr($class); ?>" title="<?php esc_attr_e("like this", "rng-ajaxlike"); ?>" >
                     <?php if (isset($cookie)): ?>
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
             <?php endif; ?>
-                </a>&nbsp;<span class="lj-post-like-count"><?php echo $like_count; ?></span>
+                </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php
             $output = ob_get_clean();

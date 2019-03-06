@@ -36,17 +36,17 @@ class rajl_settings {
      */
     public function general_settings_init() {
         register_setting("rajl_general_settings", "rajl_setting_option");
-        add_settings_section("rajl_general_setting_top", __("general settings", "rng-ajaxlike"), array($this, "general_settings_section_top"), "rajl_general_settings");
-        add_settings_field("rajl_settings_post_type", __("post type permission", "rng-ajaxlike"), array($this, "general_settings_post_types"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-post-types", "name" => "rajl_post_types"));
-        add_settings_field("rajl_settings_show_like", __("show like button", "rng-ajaxlike"), array($this, "general_settings_show_like"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-show-like", "name" => "rajl_show_like"));
-        add_settings_field("rajl_settings_like_color", __("like button color", "rng-ajaxlike"), array($this, "general_settings_like_color"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-btn-color", "name" => "rajl_btn_color"));
+        add_settings_section("rajl_general_setting_top", esc_html__("general settings", "rng-ajaxlike"), array($this, "general_settings_section_top"), "rajl_general_settings");
+        add_settings_field("rajl_settings_post_type", esc_html__("post type permission", "rng-ajaxlike"), array($this, "general_settings_post_types"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-post-types", "name" => "rajl_post_types"));
+        add_settings_field("rajl_settings_show_like", esc_html__("show like button", "rng-ajaxlike"), array($this, "general_settings_show_like"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-show-like", "name" => "rajl_show_like"));
+        add_settings_field("rajl_settings_like_color", esc_html__("like button color", "rng-ajaxlike"), array($this, "general_settings_like_color"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-btn-color", "name" => "rajl_btn_color"));
     }
 
     /**
      * general settings top section 
      */
     public function general_settings_section_top() {
-        _e("most important setting is check post type that you like to show ajax like button", "rng-ajaxlike");
+        esc_html_e("most important setting is check post type that you like to show ajax like button", "rng-ajaxlike");
     }
     /**
      * add like color picker input
@@ -108,8 +108,8 @@ class rajl_settings {
         }
         ?>
         <select class="<?php echo $args['id'] ?>" name="rajl_setting_option[<?php echo $args['name']; ?>]">
-            <option <?php echo ($show_like == "1") ? "selected=''" : ""; ?> value="1"><?php _e("Yes", "rng-ajaxlike") ?></option>
-            <option <?php echo ($show_like == "0") ? "selected=''" : ""; ?> value="0"><?php _e("No", "rng-ajaxlike") ?></option>
+            <option <?php echo ($show_like == "1") ? "selected=''" : ""; ?> value="1"><?php esc_html_e("Yes", "rng-ajaxlike") ?></option>
+            <option <?php echo ($show_like == "0") ? "selected=''" : ""; ?> value="0"><?php esc_html_e("No", "rng-ajaxlike") ?></option>
         </select>    
         <?php
     }
@@ -118,7 +118,7 @@ class rajl_settings {
      * @hook
      */
     public function admin_menu() {
-        add_submenu_page("options-general.php", __("Ajax Like Settings", "rng-ajaxlike"), __("Ajax Like Settings", "rng-ajaxlike"), "administrator", "ajaxlike-settings", array($this, "ajaxlike_settings"));
+        add_submenu_page("options-general.php", esc_html__("Ajax Like Settings", "rng-ajaxlike"), esc_html__("Ajax Like Settings", "rng-ajaxlike"), "administrator", "ajaxlike-settings", array($this, "ajaxlike_settings"));
     }
     /**
      * call setting panel view
@@ -133,7 +133,7 @@ class rajl_settings {
     public function configure_notices() {
         $dismiss = get_option("rajl_configration_dissmiss");
         if (!$dismiss) {
-            $notice = '<div class="updated"><p>' . __('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('admin.php?page=ajaxlike-settings') . '">' . __('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('rajl_dismiss_notice' => 'true', 'rajl_nonce' => wp_create_nonce("rajl_dismiss_nonce"))) . '">' . __('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
+            $notice = '<div class="updated"><p>' . esc_html__('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('admin.php?page=ajaxlike-settings') . '">' . esc_html__('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('rajl_dismiss_notice' => 'true', 'rajl_nonce' => wp_create_nonce("rajl_dismiss_nonce"))) . '">' . esc_html__('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
             echo $notice;
         }
     }
@@ -141,8 +141,11 @@ class rajl_settings {
      * dismiss configuration notice action
      */
     public function dismiss_configuration() {
-        if (isset($_GET['rajl_dismiss_notice']) and $_GET['rajl_dismiss'] = 'true' and ( isset($_GET['rajl_nonce']))) {
-            $verify_nonce = wp_verify_nonce($_GET['rajl_nonce'], 'rajl_dismiss_nonce');
+        $rajl_dismiss_notice = $_GET['rajl_dismiss_notice'];
+        $rajl_dismiss = sanitize_text_field($_GET['rajl_dismiss']);
+        $rajl_nonce = $_GET['rajl_nonce'];
+        if (isset($rajl_dismiss_notice) and $rajl_dismiss = 'true' and ( isset($rajl_nonce))) {
+            $verify_nonce = wp_verify_nonce($rajl_nonce, 'rajl_dismiss_nonce');
             if ($verify_nonce) {
                 update_option("rajl_configration_dissmiss", 1);
             }
@@ -157,7 +160,7 @@ class rajl_settings {
      */
     public function add_setting_link($links) {
         $mylinks = array(
-            '<a href="' . admin_url('options-general.php?page=ajaxlike-settings') . '">' . __("Settings", "rng-ajaxlike") . '</a>',
+            '<a href="' . admin_url('options-general.php?page=ajaxlike-settings') . '">' . esc_html__("Settings", "rng-ajaxlike") . '</a>',
         );
         return array_merge($links, $mylinks);
     }
