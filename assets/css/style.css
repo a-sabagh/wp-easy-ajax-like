@@ -30,7 +30,7 @@
 .icon-heart-o:before {
     content: "\e900";
 }
-.lj-like-wp {
+.lj-like-wrapper .lj-like-wp {
     text-decoration: none;
     text-transform: none;
     border: none;

@@ -15,16 +15,33 @@ class rajl_like {
     }
 
     /**
+     * get default settings
+     * @return Array
+     */
+    public function get_settings() {
+        $rajl_setting = get_option('rajl_setting_option');
+        if (isset($rajl_setting) and !empty($rajl_setting)) {
+            $legal_post_types = $rajl_setting['rajl_post_types'];
+            $show_like_switch = (isset($rajl_setting['rajl_show_like'])) ? $rajl_setting['rajl_show_like'] : "1";
+            return array(
+                'legal_post_types' => $legal_post_types,
+                'show_like_switch' => $show_like_switch
+            );
+        } else {
+            return array(
+                'legal_post_types' => array('post'),
+                'show_like_switch' => "1"
+            );
+        }
+    }
+
+    /**
      * check is legal post type based on settings
      * @return Array
      */
     public function legal_post_type() {
-        $rajl_setting = get_option('rajl_setting_option');
-        if (!empty($rajl_setting)) {
-            return $rajl_setting['rajl_post_types'];
-        } else {
-            return array();
-        }
+        $params = $this->get_settings();
+        return $params['legal_post_types'];
     }
 
     /**
@@ -33,7 +50,7 @@ class rajl_like {
     public function rajl_liked() {
         $liked = intval($_POST['liked']);
         $post_id = intval($_POST['post_id']);
-        
+
         if ($liked == 0 and is_numeric($post_id)) {
             $this->add_post_like($post_id);
             echo "add";
@@ -54,7 +71,7 @@ class rajl_like {
         $cookie_name = "rajl_like_wp" . $post_id;
         setcookie($cookie_name, $post_id, time() + YEAR_IN_SECONDS, "/");
         $like_count = (int) get_post_meta($post_id, "rajl_like_wp", TRUE);
-        
+
         if ($like_count > 0) {
             update_post_meta($post_id, "rajl_like_wp", $like_count + 1);
         } elseif ($like_count === 0) {
@@ -98,11 +115,12 @@ class rajl_like {
      * @return String
      */
     public function output_content_like($content) {
-        $rajl_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
-        $legal_post_types = $rajl_setting['rajl_post_types'];
-        $show_like_switch = (isset($rajl_setting['rajl_show_like'])) ? $rajl_setting['rajl_show_like'] : "1";
+        
+        $params = $this->get_settings();
+        extract($params);
+        
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
@@ -115,7 +133,7 @@ class rajl_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-                    <?php endif; ?>
+            <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php
@@ -123,16 +141,19 @@ class rajl_like {
             return $content . $output;
         }
 
-        return $content;
+        return "it work" . $content;
     }
 
     /**
      * static functionn to show like button and like count for programmers
      */
     public static function content_like() {
-        $rajl_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
+        
+        $params = $this->get_settings();
+        extract($params);
+        
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
@@ -145,7 +166,7 @@ class rajl_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-                    <?php endif; ?>
+            <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php

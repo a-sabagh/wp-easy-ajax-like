@@ -9,7 +9,7 @@ class rajl_settings {
             add_action("admin_notices", array($this, "configure_notices"));
             add_action("admin_init", array($this, "dismiss_configuration"));
             add_filter('plugin_action_links_' . RAJL_PRU, array($this, 'add_setting_link'));
-            add_action("update_option_rajl_setting_option", array($this, "add_setting_stylesheet"), 10, 2);
+            add_action("update_option_rajl_setting_option", array($this, "add_setting_stylesheet"), 1, 2);
         }
     }
 
@@ -29,8 +29,12 @@ class rajl_settings {
                 . "color: {$color} !important;"
                 . "}";
         $content = file_get_contents($file_get);
-        file_put_contents($file_put, $content . $css, FILE_TEXT);
+
+        $fp = fopen($file_put, 'w');
+        fwrite($fp, $content . $css);
+        fclose($fp);
     }
+
     /**
      * initial general setting with option name `rajl_setting_option`
      */
@@ -48,6 +52,7 @@ class rajl_settings {
     public function general_settings_section_top() {
         esc_html_e("most important setting is check post type that you like to show ajax like button", "rng-ajaxlike");
     }
+
     /**
      * add like color picker input
      * this method chain to general_settings_init
@@ -56,7 +61,7 @@ class rajl_settings {
     public function general_settings_like_color($args) {
         $btn_color = get_option("rajl_setting_option");
         if ($btn_color == FALSE) {
-            $btn_color = "#000";
+            $btn_color = "-";
         } else {
             $btn_color = $btn_color['rajl_btn_color'];
         }
@@ -64,6 +69,7 @@ class rajl_settings {
         <input type="text" class="wp-color-picker" name="rajl_setting_option[<?php echo $args['name'] ?>]" value="<?php echo $btn_color; ?>" >    
         <?php
     }
+
     /**
      * add post type selectors
      * this method chain to general_settings_init
@@ -88,12 +94,13 @@ class rajl_settings {
             }
             ?>
             <label>
-                <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="rajl_setting_option[<?php echo $args['name']; ?>][]" <?php echo $checked; ?> value="<?php echo $post_type; ?>" >
+            <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="rajl_setting_option[<?php echo $args['name']; ?>][]" <?php echo $checked; ?> value="<?php echo $post_type; ?>" >
             </label>
             <br>
             <?php
         endforeach;
     }
+
     /**
      * add show like switch selector
      * this method chain to general_settings_init
@@ -113,6 +120,7 @@ class rajl_settings {
         </select>    
         <?php
     }
+
     /**
      * add general settings submenu
      * @hook
@@ -120,6 +128,7 @@ class rajl_settings {
     public function admin_menu() {
         add_submenu_page("options-general.php", esc_html__("Ajax Like Settings", "rng-ajaxlike"), esc_html__("Ajax Like Settings", "rng-ajaxlike"), "administrator", "ajaxlike-settings", array($this, "ajaxlike_settings"));
     }
+
     /**
      * call setting panel view
      * chain to admin_menu
@@ -127,6 +136,7 @@ class rajl_settings {
     public function ajaxlike_settings() {
         include_once RAJL_ADM . "setting-panel.php";
     }
+
     /**
      * show admin notices
      */
@@ -137,6 +147,7 @@ class rajl_settings {
             echo $notice;
         }
     }
+
     /**
      * dismiss configuration notice action
      */
@@ -153,6 +164,7 @@ class rajl_settings {
             update_option("rajl_configration_dissmiss", 1);
         }
     }
+
     /**
      * add setting link to plugin screen
      * @param String $links
