@@ -10,6 +10,7 @@ class rajl_settings {
             add_action("admin_init", array($this, "dismiss_configuration"));
             add_filter('plugin_action_links_' . RAJL_PRU, array($this, 'add_setting_link'));
             add_action("update_option_rajl_setting_option", array($this, "add_setting_stylesheet"), 1, 2);
+            add_action("add_option_rajl_setting_option", array($this, "add_setting_stylesheet"), 1, 2);
         }
     }
 
