@@ -31,7 +31,6 @@ class rajl_like {
      * response to ajax call in wordpress. in other word handle wordpress hooks
      */
     public function rajl_liked() {
-        
         $liked = intval($_POST['liked']);
         $post_id = intval($_POST['post_id']);
         
@@ -54,15 +53,17 @@ class rajl_like {
     public function add_post_like($post_id) {
         $cookie_name = "rajl_like_wp" . $post_id;
         setcookie($cookie_name, $post_id, time() + YEAR_IN_SECONDS, "/");
-        $like_count = get_post_meta($post_id, "rajl_like_wp", TRUE);
-        if (intval($like_count) > 0) {
-            update_post_meta($post_id, "rajl_like_wp", intval($like_count) + 1);
-        } elseif (!isset($like_count) or empty($like_count)) {
-            add_post_meta($post_id, "rajl_like_wp", 1);
-        } else {
+        $like_count = (int) get_post_meta($post_id, "rajl_like_wp", TRUE);
+        
+        if ($like_count > 0) {
+            update_post_meta($post_id, "rajl_like_wp", $like_count + 1);
+        } elseif ($like_count === 0) {
             update_post_meta($post_id, "rajl_like_wp", 1);
+        } else {
+            add_post_meta($post_id, "rajl_like_wp", 1);
         }
     }
+
     /**
      * decrease post like count
      * @param type $post_id
@@ -71,13 +72,14 @@ class rajl_like {
         $cookie_name = "rajl_like_wp" . $post_id;
         unset($_COOKIE[$cookie_name]);
         setcookie($cookie_name, '', time() - 3600, '/');
-        $like_count = get_post_meta($post_id, "rajl_like_wp", TRUE);
-        if (isset($like_count) and intval($like_count) > 0) {
+        $like_count = (int) get_post_meta($post_id, "rajl_like_wp", TRUE);
+        if ($like_count > 0) {
             update_post_meta($post_id, "rajl_like_wp", $like_count - 1);
         } else {
             update_post_meta($post_id, "rajl_like_wp", 0);
         }
     }
+
     /**
      * localize params to script
      */
@@ -89,6 +91,7 @@ class rajl_like {
         );
         wp_localize_script("lj-script", like_obj, $data);
     }
+
     /**
      * add like button end of post content
      * @param String $content
@@ -112,7 +115,7 @@ class rajl_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-            <?php endif; ?>
+                    <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php
@@ -122,6 +125,7 @@ class rajl_like {
 
         return $content;
     }
+
     /**
      * static functionn to show like button and like count for programmers
      */
@@ -141,7 +145,7 @@ class rajl_like {
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
-            <?php endif; ?>
+                    <?php endif; ?>
                 </a>&nbsp;<span class="lj-post-like-count"><?php echo esc_html($like_count); ?></span>
             </div>
             <?php
@@ -150,6 +154,7 @@ class rajl_like {
 
         echo $output;
     }
+
     /**
      * add like count header to post list in admin panel
      * @param type $columns
@@ -158,6 +163,7 @@ class rajl_like {
     public function add_like_posts_column($columns) {
         return array_merge($columns, array('rajl_like' => '<span class="dashicons dashicons-heart"></span>'));
     }
+
     /**
      * add like count to post list in admin panel
      * @param type $column
