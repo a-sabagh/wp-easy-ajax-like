@@ -1,6 +1,6 @@
 <?php
 
-class lj_settings {
+class rajl_settings {
 
     public function __construct() {
         if (is_admin()) {
@@ -16,7 +16,7 @@ class lj_settings {
     public function add_setting_stylesheet($old_val, $new_val) {
         $file_get = RAJL_PDP . "/assets/css/style.backup.css";
         $file_put = RAJL_PDP . "/assets/css/style.css";
-        $color = $new_val['lj_btn_color'];
+        $color = $new_val['rajl_btn_color'];
         $css = "\n.lj-like-wp,"
                 . ".lj-like-wp:focus,"
                 . ".lj-like-wp:active,"
@@ -32,11 +32,11 @@ class lj_settings {
     }
 
     public function general_settings_init() {
-        register_setting("lj_general_settings", "rajl_setting_option");
-        add_settings_section("lj_general_setting_top", __("general settings", "rng-ajaxlike"), array($this, "general_settings_section_top"), "lj_general_settings");
-        add_settings_field("lj_settings_post_type", __("post type permission", "rng-ajaxlike"), array($this, "general_settings_post_types"), "lj_general_settings", "lj_general_setting_top", array("id" => "lj-post-types", "name" => "lj_post_types"));
-        add_settings_field("lj_settings_show_like", __("show like button", "rng-ajaxlike"), array($this, "general_settings_show_like"), "lj_general_settings", "lj_general_setting_top", array("id" => "lj-show-like", "name" => "lj_show_like"));
-        add_settings_field("lj_settings_like_color", __("like button color", "rng-ajaxlike"), array($this, "general_settings_like_color"), "lj_general_settings", "lj_general_setting_top", array("id" => "lj-btn-color", "name" => "lj_btn_color"));
+        register_setting("rajl_general_settings", "rajl_setting_option");
+        add_settings_section("rajl_general_setting_top", __("general settings", "rng-ajaxlike"), array($this, "general_settings_section_top"), "rajl_general_settings");
+        add_settings_field("rajl_settings_post_type", __("post type permission", "rng-ajaxlike"), array($this, "general_settings_post_types"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-post-types", "name" => "rajl_post_types"));
+        add_settings_field("rajl_settings_show_like", __("show like button", "rng-ajaxlike"), array($this, "general_settings_show_like"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-show-like", "name" => "rajl_show_like"));
+        add_settings_field("rajl_settings_like_color", __("like button color", "rng-ajaxlike"), array($this, "general_settings_like_color"), "rajl_general_settings", "rajl_general_setting_top", array("id" => "lj-btn-color", "name" => "rajl_btn_color"));
     }
 
     public function general_settings_like_color($args) {
@@ -44,7 +44,7 @@ class lj_settings {
         if ($btn_color == FALSE) {
             $btn_color = "#000";
         } else {
-            $btn_color = $btn_color['lj_btn_color'];
+            $btn_color = $btn_color['rajl_btn_color'];
         }
         ?>
         <input type="text" class="wp-color-picker" name="rajl_setting_option[<?php echo $args['name'] ?>]" value="<?php echo $btn_color; ?>" >    
@@ -56,7 +56,7 @@ class lj_settings {
         if ($active_post_type == FALSE) {
             $active_post_type = array("post");
         } else {
-            $active_post_type = $active_post_type['lj_post_types'];
+            $active_post_type = $active_post_type['rajl_post_types'];
         }
         $pt_args = array('public' => TRUE);
         $post_types = get_post_types($pt_args, 'names');
@@ -104,14 +104,14 @@ class lj_settings {
     public function configure_notices() {
         $dismiss = get_option("rajl_configration_dissmiss");
         if (!$dismiss) {
-            $notice = '<div class="updated"><p>' . __('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('admin.php?page=ajaxlike-settings') . '">' . __('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('lj_dismiss_notice' => 'true', 'lj_nonce' => wp_create_nonce("lj_dismiss_nonce"))) . '">' . __('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
+            $notice = '<div class="updated"><p>' . __('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('admin.php?page=ajaxlike-settings') . '">' . __('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('rajl_dismiss_notice' => 'true', 'rajl_nonce' => wp_create_nonce("rajl_dismiss_nonce"))) . '">' . __('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
             echo $notice;
         }
     }
 
     public function dismiss_configuration() {
-        if (isset($_GET['lj_dismiss_notice']) and $_GET['lj_dismiss'] = 'true' and ( isset($_GET['lj_nonce']))) {
-            $verify_nonce = wp_verify_nonce($_GET['lj_nonce'], 'lj_dismiss_nonce');
+        if (isset($_GET['rajl_dismiss_notice']) and $_GET['rajl_dismiss'] = 'true' and ( isset($_GET['rajl_nonce']))) {
+            $verify_nonce = wp_verify_nonce($_GET['rajl_nonce'], 'rajl_dismiss_nonce');
             if ($verify_nonce) {
                 update_option("rajl_configration_dissmiss", 1);
             }
@@ -129,4 +129,4 @@ class lj_settings {
 
 }
 
-$lj_settings = new lj_settings();
+$rajl_settings = new rajl_settings();

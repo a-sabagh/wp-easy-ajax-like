@@ -7,7 +7,7 @@ class rajl_mostliked_posts_widget extends WP_Widget {
             'classname' => 'mostliked-posts',
             'description' => __("Show most liked posts", "rng-ajaxlike")
         );
-        parent::__construct("lj_mostliked_posts", __("Most Liked Posts", "rng-ajaxlike"), $widget_options);
+        parent::__construct("rajl_mostliked_posts", __("Most Liked Posts", "rng-ajaxlike"), $widget_options);
     }
 
     /**
@@ -20,7 +20,7 @@ class rajl_mostliked_posts_widget extends WP_Widget {
         if ($active_post_type == FALSE) {
             $active_post_type = array("post");
         } else {
-            $active_post_type = $active_post_type['lj_post_types'];
+            $active_post_type = $active_post_type['rajl_post_types'];
         }
         $post_types_widget = (!empty($instance['post_types']) and isset($instance['post_types'])) ? $instance['post_types'] : array('post');
         $post_types = array_intersect($active_post_type, $post_types_widget);
@@ -79,7 +79,7 @@ class rajl_mostliked_posts_widget extends WP_Widget {
         if ($active_post_type == FALSE) {
             $active_post_type = array("post");
         } else {
-            $active_post_type = $active_post_type['lj_post_types'];
+            $active_post_type = $active_post_type['rajl_post_types'];
         }
         ?>
         <p>
@@ -124,8 +124,8 @@ class rajl_mostliked_posts_widget extends WP_Widget {
 /**
  * register widget main function
  */
-function register_lj_mostliked_posts() {
+function register_rajl_mostliked_posts() {
     register_widget("rajl_mostliked_posts_widget");
 }
 
-add_action("widgets_init", "register_lj_mostliked_posts");
+add_action("widgets_init", "register_rajl_mostliked_posts");

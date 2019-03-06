@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
             url: like_obj.admin_url,
             type: "POST",
             data: {
-                action: "lj_liked",
+                action: "rajl_liked",
                 liked: like_status,
                 post_id: like_obj.post_id,
                 user_id: like_obj.user_id

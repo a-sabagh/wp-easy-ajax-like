@@ -1,12 +1,12 @@
 <?php
 
-class lj_like {
+class rajl_like {
 
     public function __construct() {
         add_filter("the_content", array($this, "output_content_like"));
         add_action("wp_enqueue_scripts", array($this, "localize_like_script"));
-        add_action("wp_ajax_lj_liked", array($this, "lj_liked"));
-        add_action("wp_ajax_nopriv_lj_liked", array($this, "lj_liked"));
+        add_action("wp_ajax_rajl_liked", array($this, "rajl_liked"));
+        add_action("wp_ajax_nopriv_rajl_liked", array($this, "rajl_liked"));
         $legal_pts = $this->legal_post_type();
         foreach ($legal_pts as $legal_pt) {
             add_filter("manage_{$legal_pt}_posts_columns", array($this, 'add_like_posts_column'), 10, 1);
@@ -19,9 +19,9 @@ class lj_like {
      * @return Array
      */
     public function legal_post_type() {
-        $lj_setting = get_option('rajl_setting_option');
-        if (!empty($lj_setting)) {
-            return $lj_setting['lj_post_types'];
+        $rajl_setting = get_option('rajl_setting_option');
+        if (!empty($rajl_setting)) {
+            return $rajl_setting['rajl_post_types'];
         } else {
             return array();
         }
@@ -30,7 +30,7 @@ class lj_like {
     /**
      * response to ajax call in wordpress. in other word handle wordpress hooks
      */
-    public function lj_liked() {
+    public function rajl_liked() {
         if ($_POST['liked'] == "0") {
             $this->add_post_like($_POST['post_id']);
             echo "add";
@@ -91,11 +91,11 @@ class lj_like {
      * @return String
      */
     public function output_content_like($content) {
-        $lj_setting = get_option('rajl_setting_option');
+        $rajl_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
-        $legal_post_types = $lj_setting['lj_post_types'];
-        $show_like_switch = (isset($lj_setting['lj_show_like'])) ? $lj_setting['lj_show_like'] : "1";
+        $legal_post_types = $rajl_setting['rajl_post_types'];
+        $show_like_switch = (isset($rajl_setting['rajl_show_like'])) ? $rajl_setting['rajl_show_like'] : "1";
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
@@ -122,13 +122,13 @@ class lj_like {
      * static functionn to show like button and like count for programmers
      */
     public static function content_like() {
-        $lj_setting = get_option('rajl_setting_option');
+        $rajl_setting = get_option('rajl_setting_option');
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
-        if (in_array(get_post_type(), $lj_setting['lj_post_types']) and $lj_setting['lj_show_like'] == "1" and is_single()) {
+        if (in_array(get_post_type(), $rajl_setting['rajl_post_types']) and $rajl_setting['rajl_show_like'] == "1" and is_single()) {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
@@ -152,7 +152,7 @@ class lj_like {
      * @return type
      */
     public function add_like_posts_column($columns) {
-        return array_merge($columns, array('lj_like' => '<span class="dashicons dashicons-heart"></span>'));
+        return array_merge($columns, array('rajl_like' => '<span class="dashicons dashicons-heart"></span>'));
     }
     /**
      * add like count to post list in admin panel
@@ -160,7 +160,7 @@ class lj_like {
      * @param type $post_id
      */
     public function add_like_custom_column($column, $post_id) {
-        if ($column == "lj_like") {
+        if ($column == "rajl_like") {
             $like = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : "0";
             echo $like;
         }
@@ -168,4 +168,4 @@ class lj_like {
 
 }
 
-$lj_like = new lj_like();
+$rajl_like = new rajl_like();
