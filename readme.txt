@@ -20,6 +20,8 @@ Main features in rng-ajaxlike include:
 *	You can customize button color
 *	Show like count in list posts page in admin panel
 *	Show like button for each post type you want
+*	this plugin is avoided from any conflict with other plugins
+*	it is so lightweight and easy to use
 
 it is strongly was recommended that after the plugin is activated, go to the setting page and configure plugin options.
 
