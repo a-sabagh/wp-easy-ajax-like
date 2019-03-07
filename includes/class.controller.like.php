@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 class rajl_like {
 
@@ -20,7 +23,7 @@ class rajl_like {
      */
     public function get_settings() {
         $rajl_setting = get_option('rajl_setting_option');
-        if (isset($rajl_setting) and !empty($rajl_setting)) {
+        if (isset($rajl_setting) and ! empty($rajl_setting)) {
             $legal_post_types = $rajl_setting['rajl_post_types'];
             $show_like_switch = (isset($rajl_setting['rajl_show_like'])) ? $rajl_setting['rajl_show_like'] : "1";
             return array(
@@ -117,10 +120,10 @@ class rajl_like {
     public function output_content_like($content) {
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
-        
+
         $params = $this->get_settings();
         extract($params);
-        
+
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
@@ -150,10 +153,10 @@ class rajl_like {
     public static function content_like() {
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
-        
+
         $params = $this->get_settings();
         extract($params);
-        
+
         $cookie_name = 'rajl_like_wp' . get_the_ID();
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";

@@ -10,7 +10,10 @@
  * Text Domain: rng-ajaxlike
  */
 
-$prefix = "rajl_";
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 define(RAJL_PRU, plugin_basename(__FILE__));
 define(RAJL_PDU, plugin_dir_url(__FILE__));   //http://localhost:8888/rng-plugin/wp-content/plugins/rng-ajaxLike/

@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 class rajl_mostliked_posts_widget extends WP_Widget {
 
