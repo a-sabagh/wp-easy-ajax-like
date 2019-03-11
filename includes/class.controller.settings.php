@@ -147,7 +147,7 @@ class rajl_settings {
     public function configure_notices() {
         $dismiss = get_option("rajl_configration_dissmiss");
         if (!$dismiss) {
-            $notice = '<div class="updated"><p>' . esc_html__('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('admin.php?page=ajaxlike-settings') . '">' . esc_html__('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('rajl_dismiss_notice' => 'true', 'rajl_nonce' => wp_create_nonce("rajl_dismiss_nonce"))) . '">' . esc_html__('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
+            $notice = '<div class="updated"><p>' . esc_html__('RNG_ajaxLike is activated, you may need to configure it to work properly.', 'rng-ajaxlike') . ' <a href="' . admin_url('options-general.php?page=ajaxlike-settings') . '">' . esc_html__('Go to Settings page', 'rng-ajaxlike') . '</a> &ndash; <a href="' . add_query_arg(array('rajl_dismiss_notice' => 'true', 'rajl_nonce' => wp_create_nonce("rajl_dismiss_nonce"))) . '">' . esc_html__('Dismiss', 'rng-ajaxlike') . '</a></p></div>';
             echo $notice;
         }
     }
