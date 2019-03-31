@@ -25,6 +25,17 @@ Main features in rng-ajaxlike include:
 
 it is strongly was recommended that after the plugin is activated, go to the setting page and configure plugin options.
 
+= Github Repository =
+Also You can find plugin repository on github:
+[https://github.com/a-sabagh/rng-ajaxlike](https://github.com/a-sabagh/rng-ajaxlike)
+
+== Screenshots ==
+
+1. This is show like button under the content in single template
+2. This is the widget show posts based on like counts in admin panel
+3. This is the plugin settings screen
+4. This is the widget show posts based on like counts in front end
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/rng-ajaxlike` directory, or install the plugin through the WordPress plugins screen directly.

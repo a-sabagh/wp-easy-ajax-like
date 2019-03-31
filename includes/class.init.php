@@ -39,7 +39,6 @@ class rajl_init {
      */
     public function add_text_domain() {
         load_plugin_textdomain($this->slug, FALSE, RAJL_PRT . "/languages");
-        include trailingslashit(__DIR__) . "translate.php";
     }
 
     /**
@@ -67,6 +66,7 @@ class rajl_init {
         include trailingslashit(__DIR__) . "class.controller.settings.php";
         include trailingslashit(__DIR__) . "class.controller.like.php";
         include trailingslashit(__DIR__) . "widgets/mostliked-posts.php";
+		include trailingslashit(__DIR__) . "translate.php";
     }
 
 }
