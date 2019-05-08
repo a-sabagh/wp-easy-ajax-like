@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-03-07 13:21+0330\n"
-"PO-Revision-Date: 2019-03-07 13:21+0330\n"
+"PO-Revision-Date: 2019-05-08 14:03+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa\n"
@@ -67,7 +67,7 @@ msgstr "تنظیمات لایک"
 msgid ""
 "RNG_ajaxLike is activated, you may need to configure it to work properly."
 msgstr ""
-"پلاگین لایک آژاکسی مطالب فعال است، ممکن است لازم باشد آن را پیکربندی کنید تا "
+"پلاگین لایک ایجکسی مطالب فعال است، ممکن است لازم باشد آن را پیکربندی کنید تا "
 "به درستی کار کند."
 
 #: includes/class.controller.settings.php:150
@@ -84,7 +84,7 @@ msgstr "تنظیمات"
 
 #: includes/translate.php:2
 msgid "rng-ajaxlike"
-msgstr "لایک آژاکسی مطالب"
+msgstr "لایک ایجکسی مطالب"
 
 #: includes/translate.php:3
 msgid ""
@@ -93,7 +93,7 @@ msgid ""
 "widget that show posts order by like counts."
 msgstr ""
 "پلاگین وردپرس که به بازدیدکنندگان اجازه می دهد پست های مطالب را در صفحه "
-"داخلی با استفاده از تکنولوژی آژاکس لایک کنند. این پلاگین ویژگی های عالی "
+"داخلی با استفاده از تکنولوژی ایجکس لایک کنند. این پلاگین ویژگی های عالی "
 "مانند پنل تنظیمات و ویجت نمایش پست ها بر اساس تعداد لایک دارد."
 
 #: includes/translate.php:4
