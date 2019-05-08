@@ -98,7 +98,7 @@ class rajl_settings {
             }
             ?>
             <label>
-            <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="rajl_setting_option[<?php echo $args['name']; ?>][]" <?php echo $checked; ?> value="<?php echo $post_type; ?>" >
+                <?php echo $post_type ?>&nbsp;<input id="<?php echo $args['id']; ?>" type="checkbox" name="rajl_setting_option[<?php echo $args['name']; ?>][]" <?php echo $checked; ?> value="<?php echo $post_type; ?>" >
             </label>
             <br>
             <?php
@@ -156,14 +156,15 @@ class rajl_settings {
      * dismiss configuration notice action
      */
     public function dismiss_configuration() {
-        $rajl_dismiss_notice = $_GET['rajl_dismiss_notice'];
-        $rajl_dismiss = sanitize_text_field($_GET['rajl_dismiss']);
-        $rajl_nonce = $_GET['rajl_nonce'];
+        $rajl_dismiss_notice = isset($_GET['rajl_dismiss_notice']) ? $_GET['rajl_dismiss_notice'] : false;
+        $rajl_dismiss = (isset($_GET['rajl_dismiss'])) ? sanitize_text_field($_GET['rajl_dismiss']) : false;
+        $rajl_nonce = (isset($_GET['rajl_nonce'])) ? $_GET['rajl_nonce'] : false;
+        $verify_nonce = wp_verify_nonce($rajl_nonce, 'rajl_dismiss_nonce');
+        if (!$verify_nonce) {
+            return;
+        }
         if (isset($rajl_dismiss_notice) and $rajl_dismiss = 'true' and ( isset($rajl_nonce))) {
-            $verify_nonce = wp_verify_nonce($rajl_nonce, 'rajl_dismiss_nonce');
-            if ($verify_nonce) {
-                update_option("rajl_configration_dissmiss", 1);
-            }
+            update_option("rajl_configration_dissmiss", 1);
         } elseif (isset($_GET['page']) and $_GET['page'] == "ajaxlike-settings") {
             update_option("rajl_configration_dissmiss", 1);
         }

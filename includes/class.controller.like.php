@@ -109,7 +109,7 @@ class rajl_like {
             "user_id" => get_current_user_id(),
             "admin_url" => admin_url("admin-ajax.php")
         );
-        wp_localize_script("lj-script", like_obj, $data);
+        wp_localize_script("lj-script", "like_obj", $data);
     }
 
     /**
