@@ -2,7 +2,8 @@ jQuery(document).ready(function($){
     $(".lj-like-wp").on("click",function(event){        
         event.preventDefault();
         var like_elem = $(this);
-        var like_wrapper = $(this).parent(".lj-like-wrapper");
+			like_wrapper = $(this).parent(".lj-like-wrapper");
+			count = parseInt(like_elem.next(".lj-post-like-count").text());
         if(like_elem.hasClass("liked")){
             var like_status = "1";
         }else{
@@ -19,18 +20,19 @@ jQuery(document).ready(function($){
             },
             beforeSend: function(){
                 like_wrapper.append('<span class="lj-loader"></span>');
+				like_elem.addClass("disabled");
             },
             success: function(respons){
-                if(respons == "add"){
-                    var count = parseInt(like_elem.next(".lj-post-like-count").text());
-                    like_elem.next(".lj-post-like-count").text(count + 1);
+				like_elem.removeClass("disabled");
+                if(respons == "add"){                    
+                    like_elem.next(".lj-post-like-count").text(++count);
                     like_elem.addClass("liked");
                     like_elem.children("i").removeClass("icon-heart-o");
                     like_elem.children("i").addClass("icon-heart");
                 }
+				
                 if(respons == "remove"){
-                    var count = parseInt(like_elem.next(".lj-post-like-count").text());
-                    like_elem.next(".lj-post-like-count").text(count - 1);
+                    like_elem.next(".lj-post-like-count").text(--count);
                     like_elem.removeClass("liked");
                     like_elem.children("i").removeClass("icon-heart");
                     like_elem.children("i").addClass("icon-heart-o");
