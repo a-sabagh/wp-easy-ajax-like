@@ -3,7 +3,7 @@
 if (!defined('WP_UNINSTALL_PLUGIN')) {
     die;
 }
-//delte options
+//delete options
 $options = array(
     "rajl_setting_option",
     "rajl_configration_dissmiss",
