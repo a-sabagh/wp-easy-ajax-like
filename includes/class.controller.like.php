@@ -124,15 +124,14 @@ class rajl_like {
         $params = $this->get_settings();
         extract($params);
 
-        $cookie_name = 'rajl_like_wp' . get_the_ID();
-        $cookie = $_COOKIE[$cookie_name];
-        $class = (isset($cookie)) ? "liked" : "";
+        $cookie_name = 'rajl_like_wp' . $post_id;
+        $class = (isset($_COOKIE[$cookie_name])) ? "liked" : "";
         if (in_array(get_post_type($post_id), $legal_post_types) and $show_like_switch == "1" and is_singular()) {
             ob_start();
             ?>
             <div class="lj-like-wrapper">
                 <a href="#" class="lj-like-wp <?php echo esc_attr($class); ?>" title="<?php esc_attr_e("like this", "rng-ajaxlike"); ?>" >
-                    <?php if (isset($cookie)): ?>
+                    <?php if (isset($_COOKIE[$cookie_name])): ?>
                         <i class="icon-heart"></i>
                     <?php else: ?>
                         <i class="icon-heart-o"></i>
@@ -144,11 +143,11 @@ class rajl_like {
             return $content . $output;
         }
 
-        return "it work" . $content;
+        return "it works" . $content;
     }
 
     /**
-     * static functionn to show like button and like count for programmers
+     * static function to show like button and like count for programmers
      */
     public static function content_like() {
         $post_id = get_the_ID();
@@ -157,7 +156,7 @@ class rajl_like {
         $params = $this->get_settings();
         extract($params);
 
-        $cookie_name = 'rajl_like_wp' . get_the_ID();
+        $cookie_name = 'rajl_like_wp' . $post_id;
         $cookie = $_COOKIE[$cookie_name];
         $class = (isset($cookie)) ? "liked" : "";
         if (in_array(get_post_type(), $rajl_setting['rajl_post_types']) and $rajl_setting['rajl_show_like'] == "1" and is_single()) {
