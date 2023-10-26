@@ -19,9 +19,7 @@ class rajl_like {
     }
 
     public function shortcode_ajaxlike_button(){
-        ob_start();
-        $this->output_content_like();
-        return ob_get_clean();
+        return $this->output_content_like();
     }
 
     /**
@@ -124,7 +122,7 @@ class rajl_like {
      * @param String $content
      * @return String
      */
-    public function output_content_like($content) {
+    public function output_content_like($content=null) {
         $post_id = get_the_ID();
         $like_count = (get_post_meta($post_id, "rajl_like_wp", TRUE)) ? get_post_meta($post_id, "rajl_like_wp", TRUE) : 0;
 
@@ -150,7 +148,7 @@ class rajl_like {
             return $content . $output;
         }
 
-        return "it works" . $content;
+        return $content;
     }
 
     /**
