@@ -7,6 +7,7 @@ class rajl_like {
 
     public function __construct() {
         add_filter("the_content", array($this, "output_content_like"));
+        add_shortcode('ajaxlike_button', [$this,'shortcode_ajaxlike_button']);
         add_action("wp_enqueue_scripts", array($this, "localize_like_script"));
         add_action("wp_ajax_rajl_liked", array($this, "rajl_liked"));
         add_action("wp_ajax_nopriv_rajl_liked", array($this, "rajl_liked"));
@@ -15,6 +16,12 @@ class rajl_like {
             add_filter("manage_{$legal_pt}_posts_columns", array($this, 'add_like_posts_column'), 10, 1);
             add_action("manage_{$legal_pt}_posts_custom_column", array($this, 'add_like_custom_column'), 10, 2);
         }
+    }
+
+    public function shortcode_ajaxlike_button(){
+        ob_start();
+        $this->output_content_like();
+        return ob_get_clean();
     }
 
     /**
